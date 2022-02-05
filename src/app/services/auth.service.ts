@@ -12,11 +12,11 @@ export class AuthService {
   constructor(public _http: HttpClient) { }
 
   registerUser(requestObj: any): any{
-    return this._http.post('http://127.0.0.1:5000/register', requestObj,this.httpOptions);
+    return this._http.post('localhost:3000/register', requestObj,this.httpOptions);
   }
 
   loginUser(requestObj: any): any{
-    return this._http.post('http://127.0.0.1:5000/login', requestObj,this.httpOptions);
+    return this._http.post('localhost:3000/login', requestObj,this.httpOptions);
   }
 
 }

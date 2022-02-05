@@ -1,11 +1,14 @@
-<nav class="navbar fixed-top navbar-dark bg-dark">
-    <h4><a class="navbar-brand">Blogs</a></h4>
-  </nav>
 
 <div class="container">
 <div class="card text-center">
     
-    
+    <div> 
+      <tr class="filter-by"><td><b>Filter By: &nbsp;</b></td><td><select (change)= "filterBy($event?.target)">
+        <option value = 'new'>New to Old</option>
+        <option value = 'old'>Old to New</option>
+      </select>
+    </td></tr>
+    </div>
     <div class="card-body" *ngFor= "let blog of bloglist">
         <h5> <a class="anchor" (click)= "navigateToDetail(blog)"> {{blog?.title}} </a> </h5>
     <p class="card-text">Author: {{blog?.author}}</p>
@@ -22,6 +25,3 @@
     
   </div>
 </div>
-<nav class="navbar fixed-bottom navbar-dark bg-dark">
-    <!-- <h4><a class="navbar-brand">Blogs</a></h4> -->
-  </nav>

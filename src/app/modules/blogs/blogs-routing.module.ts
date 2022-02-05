@@ -8,7 +8,7 @@ const routes: Routes = [{
   component: BlogHomeComponent
 },
 {
-  path: 'view',
+  path: 'view/:id',
   component: BlogDetailComponent
 }
 ,{
