@@ -1,0 +1,27 @@
+<nav class="navbar fixed-top navbar-dark bg-dark">
+    <h4><a class="navbar-brand">Blogs</a></h4>
+  </nav>
+
+<div class="container">
+<div class="card text-center">
+    
+    
+    <div class="card-body" *ngFor= "let blog of bloglist">
+        <h5> <a class="anchor" (click)= "navigateToDetail(blog)"> {{blog?.title}} </a> </h5>
+    <p class="card-text">Author: {{blog?.author}}</p>
+    <p class="card-text">Date: {{blog?.publish_date}}</p>
+
+    <p class="card-text">Description: {{blog?.description}}</p>
+
+      <div class="card-footer text-muted">
+        <!-- {{ blog?.publish_date}} -->
+      </div>
+      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    </div>
+    
+    
+  </div>
+</div>
+<nav class="navbar fixed-bottom navbar-dark bg-dark">
+    <!-- <h4><a class="navbar-brand">Blogs</a></h4> -->
+  </nav>

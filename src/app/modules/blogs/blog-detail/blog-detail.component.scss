@@ -1,7 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    background: #eee
+}
 
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+.date {
+    font-size: 11px
+}
+
+.comments {
+    font-size: 12px
+}
+.time-stamp {
+font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+color: #636466;
+font-size: 13px;
+}
+
+.fs-12 {
+    font-size: 12px
+}
+
+.shadow-none {
+    box-shadow: none
+}
+
+
+
+// .cursor:hover {
+//     color: black
+// }
+
+.cursor {
+    cursor: pointer
+}
+
+.textarea {
+    resize: none
+}
 
 .anchor{
     text-decoration: none;
