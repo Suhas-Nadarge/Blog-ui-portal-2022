@@ -1,3 +1,4 @@
+import { ToastrManager } from 'ng6-toastr-notifications';
 import { BlogService } from './../../../services/blog.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -11,17 +12,28 @@ import { mockData } from 'src/app/constant';
 export class BlogHomeComponent implements OnInit {
 
   // bloglist = mockData.posts
-  bloglist: any;
-  constructor(public router: Router, public blogService: BlogService) { }
+  bloglist: any = [];
+  isLoader =  false;
+  constructor(public router: Router, public toasterService: ToastrManager,public blogService: BlogService) { }
 
   ngOnInit(): void {
     this.getBlogList();
   }
   getBlogList() {
+    this.isLoader = true;
     this.blogService.getBlogListData().subscribe((data:any) => {
+    this.isLoader = false;
+
     this.bloglist = data;
     this.filterBy({value:'new'});
-    });
+    },
+    (error)=>{
+    this.isLoader = false;
+    this.toasterService.errorToastr('Something went wrong!', 'Error',{toastTimeout:6000});
+
+      
+    }
+    );
     
   }
 
@@ -36,6 +48,7 @@ export class BlogHomeComponent implements OnInit {
   }
 
   navigateToDetail(obj: any): any{
-    this.router.navigate([`home/blogs/view/${btoa(obj.id)}`],{ state: { _id: obj.id } });
+    // this.router.navigate(['home/blogs/view''
+    this.router.navigate([`home/view/${btoa(obj.id)}`],{ state: { _id: obj.id } });
   }
 }

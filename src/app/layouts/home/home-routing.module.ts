@@ -8,7 +8,7 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       {
-        path: 'blogs',
+        path: '',
         loadChildren: () => import('../../modules/blogs/blogs.module').then(m => m.BlogsModule)
       }
     ]

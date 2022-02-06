@@ -21,7 +21,16 @@
       </div>
       <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
     </div>
-    
+    <div class="card-body" *ngIf= "!bloglist.length">
+  Oops! No data found. Please refresh the page.
+ <button class="btn btn-md ml-1 btn-dark shadow-none float-right" type="button"
+                    (click)= "getBlogList()"> Refresh </button>
+    </div>
+    <div *ngIf= "isLoader" class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
     
   </div>
 </div>

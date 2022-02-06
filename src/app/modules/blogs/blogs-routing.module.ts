@@ -4,17 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { BlogHomeComponent } from './blog-home/blog-home.component';
 
 const routes: Routes = [{
-  path: 'home',
+  path: '',
   component: BlogHomeComponent
 },
 {
   path: 'view/:id',
   component: BlogDetailComponent
 }
-,{
-  path: '',
-  component: BlogHomeComponent,
-},
+
 ];
 
 @NgModule({
