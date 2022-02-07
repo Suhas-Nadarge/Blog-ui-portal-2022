@@ -10,16 +10,19 @@
     </td></tr>
     </div>
     <div class="card-body" *ngFor= "let blog of bloglist">
-        <h5> <a class="anchor" (click)= "navigateToDetail(blog)"> {{blog?.title}} </a> </h5>
+        <h5> <a class="anchor" (click)= "navigateToDetail(blog)"> {{blog?.title}} </a> </h5> 
+    <p class="time-stamp" style="float: right;"><b>Published on:</b> {{blog?.publish_date}}</p>
+<br>
     <p class="card-text"><b>Author:</b> {{blog?.author}}</p>
-    <p class="card-text"><b>Date:</b> {{blog?.publish_date}}</p>
+<p class="card-text"><b>Description: {{blog?.description}}</b></p>
+    
+    <div class="" [innerHTML]= "blog?.content">
 
-    <p class="card-text"><b>Description:</b> {{blog?.description}}</p>
-    <div class="" [innerHTML]= "blog?.content"></div>
+    </div> <br>
+    <a (click)= "navigateToDetail(blog)" class="read-more">Read More</a>
       <div class="card-footer text-muted">
         <!-- {{ blog?.publish_date}} -->
       </div>
-      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
     </div>
     <div class="card-body" *ngIf= "!bloglist.length">
   Oops! No data found. Please refresh the page.

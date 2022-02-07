@@ -7,11 +7,11 @@
     text-decoration: none;
     color:black;
     border-bottom:3px solid black;
-    cursor:alias;
+    cursor:default;
     }
-
+  
     .a{
-      cursor:alias;
+      cursor:default;
     }
     #content h1 {
         font-size: 26px;
@@ -29,9 +29,50 @@
         margin-top: 60px;
         border: burlywood;
     }
-
+    
     .pointer {
       cursor: pointer;
     }
     
-
+    body {
+      background: #eee
+  }
+  
+  .date {
+      font-size: 11px
+  }
+  
+  .comments {
+      overflow-y: scroll;
+      max-height: 200px; 
+  }
+  
+  
+  .comment-desc {
+  font-size: 12px;
+  margin-top: -11px;
+  padding-left: 9px;
+  }
+  
+  .time-stamp {
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  color: #636466;
+  font-size: 13px;
+  }
+  
+  .fs-12 {
+      font-size: 12px
+  }
+  
+  .shadow-none {
+      box-shadow: none
+  }
+  
+  
+  .textarea {
+      resize: none
+  }
+  
+        
+  
+  

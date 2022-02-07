@@ -23,7 +23,7 @@ export class BlogService {
   }
 
   addComment(requestObj: any): Observable <any>{
-    return this._http.put(`http://localhost:9000/posts/${requestObj.id}/comments`, requestObj,this.httpOptions);
+    return this._http.post(`http://localhost:9000/posts/${requestObj.postId}/comments`, requestObj,this.httpOptions);
   }
 
   editComment(requestObj: any): Observable <any>{
