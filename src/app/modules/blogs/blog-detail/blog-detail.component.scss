@@ -7,10 +7,18 @@ body {
 }
 
 .comments {
-    font-size: 12px;
-    margin-top: -14px;
-    padding-left: 9px;
+    overflow-y: scroll;
+    max-height: 200px;
+    
 }
+
+
+.comment-desc {
+font-size: 12px;
+margin-top: -11px;
+padding-left: 9px;
+}
+
 .time-stamp {
 font-family: "Segoe UI", "Helvetica Neue", sans-serif;
 color: #636466;
@@ -24,6 +32,7 @@ font-size: 13px;
 .shadow-none {
     box-shadow: none
 }
+
 
 
 

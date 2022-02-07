@@ -15,15 +15,26 @@ export class BlogService {
 
 
   getBlogListData(): Observable<any> {
-    return this._http.get('http://localhost:3000/bloglist',this.httpOptions);
+    return this._http.get('http://localhost:9000/posts',this.httpOptions);
   }
 
   getBlogDetailsData(id: number): Observable<any> {
-    return this._http.get(`http://localhost:3000/blogdetail/${id}`,this.httpOptions);
+    return this._http.get(`http://localhost:9000/posts/${id}`,this.httpOptions);
   }
 
   addComment(requestObj: any): Observable <any>{
-    return this._http.put('http://localhost:3000/add/comment', requestObj,this.httpOptions);
+    return this._http.put(`http://localhost:9000/posts/${requestObj.id}/comments`, requestObj,this.httpOptions);
   }
 
+  editComment(requestObj: any): Observable <any>{
+    return this._http.put(`http://localhost:9000/comments/${requestObj.id}`, requestObj,this.httpOptions);
+  }
+
+  getAllComments(id: any): Observable<any> {
+    return this._http.get(`http://localhost:9000/posts/${id}/comments`,this.httpOptions);
+  }
+
+
+  // POST /posts/{id}/comments Add comment to single blog post
+  // PUT /comments/{id} Update single comment
 }

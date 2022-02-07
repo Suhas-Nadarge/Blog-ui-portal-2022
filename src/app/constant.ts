@@ -132,7 +132,3 @@ export const mockData = {
       "content": "Nunc facilisis nisi vitae dapibus sodales. Proin vitae nunc turpis."
     }]
   }
-
-  export const comments = {
-"data":['Wow what a blog!!!!!!!!!', 'Ek dum Chutiya Blog bhenchod mar ja tu lavde', 'Wow what a blog!!!!!!!!!', 'Ek dum Chutiya Blog bhenchod mar ja tu lavde'] 
-  }

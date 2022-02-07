@@ -11,11 +11,11 @@
     </div>
     <div class="card-body" *ngFor= "let blog of bloglist">
         <h5> <a class="anchor" (click)= "navigateToDetail(blog)"> {{blog?.title}} </a> </h5>
-    <p class="card-text">Author: {{blog?.author}}</p>
-    <p class="card-text">Date: {{blog?.publish_date}}</p>
+    <p class="card-text"><b>Author:</b> {{blog?.author}}</p>
+    <p class="card-text"><b>Date:</b> {{blog?.publish_date}}</p>
 
-    <p class="card-text">Description: {{blog?.description}}</p>
-
+    <p class="card-text"><b>Description:</b> {{blog?.description}}</p>
+    <div class="" [innerHTML]= "blog?.content"></div>
       <div class="card-footer text-muted">
         <!-- {{ blog?.publish_date}} -->
       </div>
