@@ -2,7 +2,7 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 import { BlogService } from './../../../services/blog.service';
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-blog-detail',
@@ -13,10 +13,14 @@ export class BlogDetailComponent implements OnInit {
 
   currentBlog : any = {}
   commentForm!: FormGroup
+  editCommentForm!: FormGroup
   id : any;
   allComments : any=[];
   current = new Date()
   isLoader = false;
+  isEdit = false;
+  currentIndex : any;
+  editComments = new FormArray([]);
 
 
 
@@ -41,6 +45,10 @@ export class BlogDetailComponent implements OnInit {
     this.commentForm = this.fb.group({
       comment:['',Validators.required]
     })
+
+    this.editCommentForm = this.fb.group({
+      comment:['',Validators.required]
+    })
     
   }
 
@@ -49,6 +57,7 @@ export class BlogDetailComponent implements OnInit {
     this.blogService.getAllComments(id).subscribe((resp:any) => {
       this.isLoader = false;
       this.allComments = resp;
+      this.allComments.map((rep: any)=>{this.allComments['isEdit'] = false})
       });
   }
 
@@ -80,6 +89,7 @@ export class BlogDetailComponent implements OnInit {
     // this.currentBlog.comments.push(commentObj);
     // const requestObj = this.currentBlog
     this.blogService.addComment(commentObj).subscribe((resp:any) => {
+    this.toasterService.successToastr('Comment added successfully!', 'Success',{toastTimeout:6000});
       this.commentForm.reset();
       this.getAllDetails();
     },
@@ -89,6 +99,38 @@ export class BlogDetailComponent implements OnInit {
     }
     );
   }
+
+  enableEdit(index : number){
+    
+    this.isEdit = true;
+
+    this.currentIndex =  index;
+    this.allComments[index]['isEdit'] = true; 
+  }
+
+  updateComment(index: any){
+    console.log((<HTMLInputElement>document.getElementById(index)).value)
+    this.isEdit = false;
+    this.allComments[this.currentIndex]['isEdit'] = false; 
+    const commentObj = {
+      'user': 'Anonymous',
+      'date': new Date().toISOString().slice(0, 10),
+      'content': (<HTMLInputElement>document.getElementById(index)).value,
+      'postId': this.allComments[index].postId,
+      'id':this.allComments[index].id,
+      'parent_id': null
+    }
+    this.blogService.editComment(commentObj).subscribe((resp:any) => {
+      this.toasterService.successToastr('Comment updated successfully!', 'Success',{toastTimeout:6000});
+        this.commentForm.reset();
+        this.getAllDetails();
+      },
+      (error)=>{
+      this.isLoader = false;
+      this.toasterService.errorToastr('Something went wrong!', 'Error',{toastTimeout:6000});
+      }
+      );
+    }
 
   navigateToBlogs(): void {
     this.router.navigate(['home/blogs']);

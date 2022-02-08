@@ -11,7 +11,6 @@ import { mockData } from 'src/app/constant';
 })
 export class BlogHomeComponent implements OnInit {
 
-  // bloglist = mockData.posts
   bloglist: any = [];
   isLoader =  false;
   constructor(public router: Router, public toasterService: ToastrManager,public blogService: BlogService) { }
@@ -31,7 +30,6 @@ export class BlogHomeComponent implements OnInit {
     this.isLoader = false;
     this.toasterService.errorToastr('Something went wrong!', 'Error',{toastTimeout:6000});
 
-      
     }
     );
     

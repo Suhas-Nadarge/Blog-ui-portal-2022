@@ -27,7 +27,7 @@ export class BlogService {
   }
 
   editComment(requestObj: any): Observable <any>{
-    return this._http.put(`http://localhost:9000/comments/${requestObj.id}`, requestObj,this.httpOptions);
+    return this._http.put(`http://localhost:9000/comments/${requestObj.postId}`, requestObj,this.httpOptions);
   }
 
   getAllComments(id: any): Observable<any> {
