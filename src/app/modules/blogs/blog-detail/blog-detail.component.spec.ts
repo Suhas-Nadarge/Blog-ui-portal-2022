@@ -1,14 +1,45 @@
+import { ActivatedRoute, convertToParamMap, Router, RouterModule } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BlogDetailComponent } from './blog-detail.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs/internal/observable/of';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ng6-toastr-notifications';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('BlogDetailComponent', () => {
   let component: BlogDetailComponent;
   let fixture: ComponentFixture<BlogDetailComponent>;
 
+  const RouterSpy = jasmine.createSpyObj(
+    'Router',
+    ['navigate','getCurrentNavigation']
+  );
+
+  const ActivatedRouteSpy = {
+    snapshot: {
+      paramMap: convertToParamMap({
+        some: 'some',
+        else: 'else',
+      })
+    },
+    queryParamMap: of(
+      convertToParamMap({
+        some: 'some',
+        else: 'else',
+      })
+    )
+  };
+  
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BlogDetailComponent ]
+      declarations: [ BlogDetailComponent ],
+      imports:[RouterTestingModule, ReactiveFormsModule, ToastrModule.forRoot(), HttpClientTestingModule  ],
+      providers: [
+        { provide: ActivatedRoute,   useValue: ActivatedRouteSpy    },
+        { provide: Router,           useValue: RouterSpy            }
+      ]
     })
     .compileComponents();
   });
