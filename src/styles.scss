@@ -87,3 +87,10 @@
    }
   &:hover{ opacity: 0.8; }
 }
+
+.fieldError {
+  color: red !important;
+  font-size: 13px !important;
+  margin-bottom: 0;
+  font-weight: 500
+}

@@ -17,7 +17,13 @@
                 <div [formGroup]="commentForm">
                     <label for="comments"><b class="text-secondary">Add comments: </b></label>
                     <textarea formControlName="comment" class="form-control ml-1 shadow-none textarea"></textarea>
-
+                    <span class="fieldError"
+                    *ngIf= "commentForm.get('comment')?.invalid&& (commentForm.get('comment')?.dirty || commentForm.get('comment')?.touched)">
+                    <span class="fieldError"
+                        *ngIf= "commentForm.get('comment')?.value === ''">
+                        This field is required.
+                    </span>
+                </span>
                 </div>
                 <div class="text-right pt-3">
                     <button class="btn btn-dark btn-sm shadow-none" type="button" (click)="postComment()"
