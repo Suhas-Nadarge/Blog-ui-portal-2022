@@ -60,6 +60,8 @@ export class BlogDetailComponent implements OnInit {
       this.isLoader = false;
       this.allComments = resp;
       this.allComments.map((rep: any)=>{this.allComments['isEdit'] = false})
+
+      // sort comments from recently added(new to old)
       this.allComments =  this.allComments.sort((first: any, second: any) => 0 - (new Date(first.date) >  new Date(second.date) ? 1 : -1));
       });
   }
