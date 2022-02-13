@@ -53,4 +53,30 @@ describe('BlogDetailComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should post comment to the blog', () => {
+    component.allComments = [];
+    component.allComments.push(
+      {'user': 'Anonymous',
+    'date': new Date().toISOString().slice(0, 10),
+    'content': 'content',
+    'postId': 0,
+    'parent_id': null}
+)
+    fixture.detectChanges();
+
+    component.postComment();
+    fixture.detectChanges();
+
+    const expectedObj = [{
+      'user': 'Anonymous',
+      'date': new Date().toISOString().slice(0, 10),
+      'content': 'content',
+      'postId': 0,
+      'parent_id': null
+
+    }]
+
+    expect(component.allComments).toEqual(expectedObj);
+  });
 });

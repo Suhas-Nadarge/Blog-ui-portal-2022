@@ -26,7 +26,7 @@ export class BlogHomeComponent implements OnInit {
     this.bloglist = data;
     this.filterBy({value:'new'});
     },
-    (error)=>{
+    (error: any)=>{
     this.isLoader = false;
     this.toasterService.errorToastr('Something went wrong!', 'Error',{toastTimeout:6000});
 

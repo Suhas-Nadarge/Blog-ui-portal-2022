@@ -1,8 +1,10 @@
+import { Comments } from './../../../interfaces/comments';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { BlogService } from './../../../services/blog.service';
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
+import { BlogDetails } from 'src/app/interfaces/blog-details';
 
 @Component({
   selector: 'app-blog-detail',
@@ -11,15 +13,15 @@ import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 })
 export class BlogDetailComponent implements OnInit {
 
-  currentBlog : any = {}
+  currentBlog ?: BlogDetails; 
   commentForm!: FormGroup
   editCommentForm!: FormGroup
-  id : any;
-  allComments : any=[];
+  id : number;
+  allComments : any = [];
   current = new Date()
   isLoader = false;
   isEdit = false;
-  currentIndex : any;
+  currentIndex ?: number;
   editComments = new FormArray([]);
 
 
@@ -58,6 +60,7 @@ export class BlogDetailComponent implements OnInit {
       this.isLoader = false;
       this.allComments = resp;
       this.allComments.map((rep: any)=>{this.allComments['isEdit'] = false})
+      this.allComments =  this.allComments.sort((first: any, second: any) => 0 - (new Date(first.date) >  new Date(second.date) ? 1 : -1));
       });
   }
 
@@ -79,11 +82,11 @@ export class BlogDetailComponent implements OnInit {
   postComment(){ 
     this.isLoader = true;
 
-    const commentObj = {
+    const commentObj: Comments= {
       'user': 'Anonymous',
       'date': new Date().toISOString().slice(0, 10),
       'content': this.commentForm.value.comment,
-      'postId': this.currentBlog.id,
+      'postId': Number(this.currentBlog?.id),
       'parent_id': null
     }
     // this.currentBlog.comments.push(commentObj);
@@ -93,7 +96,7 @@ export class BlogDetailComponent implements OnInit {
       this.commentForm.reset();
       this.getAllDetails();
     },
-    (error)=>{
+    (error: any)=>{
     this.isLoader = false;
     this.toasterService.errorToastr('Something went wrong!', 'Error',{toastTimeout:6000});
     }
@@ -111,13 +114,13 @@ export class BlogDetailComponent implements OnInit {
   updateComment(index: any){
     console.log((<HTMLInputElement>document.getElementById(index)).value)
     this.isEdit = false;
-    this.allComments[this.currentIndex]['isEdit'] = false; 
+    this.allComments[index]['isEdit'] = false; 
     const commentObj = {
       'user': 'Anonymous',
       'date': new Date().toISOString().slice(0, 10),
       'content': (<HTMLInputElement>document.getElementById(index)).value,
-      'postId': this.allComments[index].postId,
-      'id':this.allComments[index].id,
+      'postId': Number(this.allComments[index].postId),
+      'id':Number(this.allComments[index].id),
       'parent_id': null
     }
     this.blogService.editComment(commentObj).subscribe((resp:any) => {
@@ -125,7 +128,7 @@ export class BlogDetailComponent implements OnInit {
         this.commentForm.reset();
         this.getAllDetails();
       },
-      (error)=>{
+      (error: any)=>{
       this.isLoader = false;
       this.toasterService.errorToastr('Something went wrong!', 'Error',{toastTimeout:6000});
       }
